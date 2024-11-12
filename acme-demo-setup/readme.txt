@@ -3,8 +3,8 @@
 Contributors: acmethemes, codersantosh
 Tags: advanced import, demo import, dummydata, acmethemes, oneclick demo import
 Requires at least: 4.8
-Tested up to: 6.6
-Stable tag: 2.1.0
+Tested up to: 6.7
+Stable tag: 2.1.1
 Requires PHP: 5.6.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -51,6 +51,9 @@ If you have the issues on the plugin [Visit Support Page](https://wordpress.org/
 1. Acme Demo Setup
 
 == Changelog ==
+
+= 2.1.1 =
+* Updated : Latest version test
 
 = 2.1.0 =
 * Added:    Plugin link to Import.
