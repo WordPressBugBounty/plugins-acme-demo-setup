@@ -7,10 +7,9 @@ if ( ! class_exists( 'Acme_Demo_Setup_Template_Library_Api' ) ) {
 	 * @package Acme Themes
 	 * @subpackage Acme Demo Setup Template Library Api
 	 * @since 2.0.1
-     *
-     * Call like this
-     * SITEURL/wp-json/acmethemes-demo-api/v1/fetch_templates/
 	 *
+	 * Call like this
+	 * SITEURL/wp-json/acmethemes-demo-api/v1/fetch_templates/
 	 */
 	class Acme_Demo_Setup_Template_Library_Api extends WP_Rest_Controller {
 
@@ -33,7 +32,7 @@ if ( ! class_exists( 'Acme_Demo_Setup_Template_Library_Api' ) ) {
 		 */
 		public function run() {
 			add_action( 'rest_api_init', array( $this, 'register_routes' ) );
-        }
+		}
 
 		/**
 		 * Register REST API route
@@ -41,24 +40,46 @@ if ( ! class_exists( 'Acme_Demo_Setup_Template_Library_Api' ) ) {
 		public function register_routes() {
 			$namespace = $this->namespace . $this->version;
 
-            register_rest_route(
-                $namespace,
-                '/fetch_templates',
-                array(
-                    array(
-                        'methods'	=> \WP_REST_Server::READABLE,
-                        'callback'	=> array( $this, 'fetch_templates' ),
-                        'args'		=> array(
-                            'theme-slug'	=> array(
-                                'type'        => 'string',
-                                'required'    => true,
-                                'description' => __( 'Theme Slug', 'acme-demo-setup' ),
-                            ),
-                        ),
-                        'permission_callback' => '__return_true',
-                    ),
-                )
-            );
+			register_rest_route(
+				$namespace,
+				'/fetch_templates',
+				array(
+					array(
+						'methods'             => \WP_REST_Server::READABLE,
+						'callback'            => array( $this, 'fetch_templates' ),
+						'args'                => array(
+							'theme-slug' => array(
+								'type'        => 'string',
+								'required'    => true,
+								'description' => __( 'Theme Slug', 'acme-demo-setup' ),
+							),
+						),
+						'permission_callback' => '__return_true',
+					),
+				)
+			);
+			register_rest_route(
+				$namespace,
+				'/all-demos',
+				array(
+					array(
+						'methods'             => \WP_REST_Server::READABLE,
+						'callback'            => array( $this, 'get_all_templates' ),
+						'permission_callback' => '__return_true',
+					),
+				)
+			);
+			register_rest_route(
+				$namespace,
+				'/all-items',
+				array(
+					array(
+						'methods'             => \WP_REST_Server::READABLE,
+						'callback'            => array( $this, 'get_all_items' ),
+						'permission_callback' => '__return_true',
+					),
+				)
+			);
 		}
 
 		/**
@@ -67,13 +88,33 @@ if ( ! class_exists( 'Acme_Demo_Setup_Template_Library_Api' ) ) {
 		 * @return array|bool|\WP_Error
 		 */
 		public function fetch_templates( \WP_REST_Request $request ) {
-            if ( ! $request->get_param( 'theme-slug' ) ) {
-                return false;
-            }
-            $theme_slug = $request->get_param( 'theme-slug' );
+			if ( ! $request->get_param( 'theme-slug' ) ) {
+				return false;
+			}
+			$theme_slug = $request->get_param( 'theme-slug' );
 
-            $templates = acme_demo_setup_get_templates_lists( $theme_slug );
+			$templates = acme_demo_setup_get_templates_lists( $theme_slug );
 			return rest_ensure_response( $templates );
+		}
+
+		/**
+		 * Function to get all templates.
+		 *
+		 * @return array
+		 */
+		public function get_all_templates( \WP_REST_Request $request ) {
+			$templates = acme_demo_setup_get_all_templates();
+			return rest_ensure_response( $templates );
+		}
+
+		/**
+		 * Function to get all items.
+		 *
+		 * @return array
+		 */
+		public function get_all_items( \WP_REST_Request $request ) {
+			$all_items = acme_demo_setup_get_all_items();
+			return rest_ensure_response( $all_items );
 		}
 
 		/**

@@ -107,7 +107,7 @@ class Acme_Demo_Setup {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name      = 'acme-demo-setup';
-		$this->plugin_full_name = esc_html__( 'Acme Demo Setup', 'acme-demo-setup' );
+		$this->plugin_full_name = 'Acme Demo Setup';
 
 		$this->load_dependencies();
 		$this->set_locale();

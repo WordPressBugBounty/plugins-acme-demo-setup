@@ -17,7 +17,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Requires Plugins:  advanced-import
  * Plugin URI:
  * Description:       Install Template Demo Library for Acme Themes
- * Version:           2.1.1
+ * Version:           2.1.2
  * Author:            acmethemes
  * Author URI:        https://www.acmethemes.com/
  * License:           GPL-2.0+
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 
 /*Define Constants for this plugin*/
-define( 'ACME_DEMO_SETUP_VERSION', '2.1.1' );
+define( 'ACME_DEMO_SETUP_VERSION', '2.1.2' );
 define( 'ACME_DEMO_SETUP_PLUGIN_NAME', 'acme-demo-setup' );
 define( 'ACME_DEMO_SETUP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ACME_DEMO_SETUP_URL', plugin_dir_url( __FILE__ ) );
